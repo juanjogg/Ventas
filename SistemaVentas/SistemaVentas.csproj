@@ -157,10 +157,36 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\Categoria.cs">
+      <DependentUpon>VentasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Cliente.cs">
+      <DependentUpon>VentasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Factura.cs">
+      <DependentUpon>VentasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Producto.cs">
+      <DependentUpon>VentasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Proveedore.cs">
+      <DependentUpon>VentasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Telefono.cs">
+      <DependentUpon>VentasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Venta.cs">
+      <DependentUpon>VentasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\VentasModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>VentasModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\VentasModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VentasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\VentasModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -170,6 +196,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Factura.cs" />
+    <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\Proveedor.cs" />
+    <Compile Include="Models\Telefonos.cs" />
+    <Compile Include="Models\Ventas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +213,12 @@
     <Content Include="Data\VentasModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>VentasModel.Context.cs</LastGenOutput>
+      <DependentUpon>VentasModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Data\VentasModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VentasModel.edmx</DependentUpon>
+      <LastGenOutput>VentasModel.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -194,9 +233,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VentasModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Data\VentasModel.edmx.diagram">
+    <Content Include="Data\VentasModel.edmx.diagram">
       <DependentUpon>VentasModel.edmx</DependentUpon>
-    </None>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -225,7 +264,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
