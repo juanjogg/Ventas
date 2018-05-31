@@ -7,8 +7,8 @@ namespace SistemaVentas.Models
 {
     public class Factura
     {
-        public int Id { get; set; }
-        public int IdProducto { get; set; }
+        public Ventas venta { get; set; }
+        public Producto producto { get; set; }
         public int cantidad { get; set; }
     }
 }
