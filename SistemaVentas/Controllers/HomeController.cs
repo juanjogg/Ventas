@@ -35,8 +35,9 @@ namespace SistemaVentas.Controllers
         {
             List<MD.Producto> productos = new List<MD.Producto>();
             var item = from p in dataBase.Productos
+                       
                        where (p.Stock > 0)
-                       select new { p.IdCategoria,p.Nombre,p.Precio};
+                       select new { p.Nombre,p.Precio, p.Categoria};
             foreach (var prod in item)
             {
                 if(prod.Nombre == null)
@@ -46,7 +47,8 @@ namespace SistemaVentas.Controllers
                 else
                 {
                     MD.Producto producto = new MD.Producto();
-                    producto.IdCategoria = prod.IdCategoria;
+                    producto.categoria = new MD.Categoria();
+                    producto.categoria.descripcion = prod.Categoria.Descripcion;
                     producto.nombre = prod.Nombre;
                     producto.precio = prod.Precio;
                     productos.Add(producto);

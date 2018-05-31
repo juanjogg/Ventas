@@ -9,7 +9,7 @@ namespace SistemaVentas.Models
     {
         public int IdVenta { get; set; }
         public DateTime fecha { get; set; }
-        public int IdCliente { get; set;}
+        public Cliente cliente { get; set;}
         public double descuento { get; set; }
         public double total { get; set; }
 

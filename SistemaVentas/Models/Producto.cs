@@ -12,6 +12,6 @@ namespace SistemaVentas.Models
         public double precio { get; set; }
         public int stock { get; set; }
         public int IdProveedor { get; set; }
-        public int IdCategoria { get; set; }
+        public Categoria categoria { get; set; }
     }
 }
