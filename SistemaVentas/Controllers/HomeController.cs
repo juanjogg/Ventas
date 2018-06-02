@@ -37,7 +37,7 @@ namespace SistemaVentas.Controllers
             var item = from p in dataBase.Productos
                        
                        where (p.Stock > 0)
-                       select new { p.Nombre,p.Precio, p.Categoria};
+                       select new { p.Nombre,p.Precio, p.Categoria, p.Id};
             foreach (var prod in item)
             {
                 if(prod.Nombre == null)
@@ -51,6 +51,7 @@ namespace SistemaVentas.Controllers
                     producto.categoria.descripcion = prod.Categoria.Descripcion;
                     producto.nombre = prod.Nombre;
                     producto.precio = prod.Precio;
+                    producto.Id = prod.Id;
                     productos.Add(producto);
                 }
             }

@@ -11,12 +11,18 @@
 </div>
 
 <div>
-    <table border="1">
+    <table class="table">
+        <tr>
+            <th>Nombre Producto</th>
+            <th>Precio</th>
+            <th>Categoría</th>
+        </tr>
         @foreach (MD.Producto producto in Model)
         {
             <tr>
-                <td>@producto.nombre</td>
-                <td>@producto.precio</td>
+                <!--<td onclick="location.href='Url.Action("Ver","Producto")'">producto.nombre</td> -->
+                <td><a href="@Url.Action("Ver","Producto",new { id = producto.Id})">@producto.nombre</a></td>
+                <td>$@producto.precio</td>
                 <td>@producto.categoria.descripcion</td>
             </tr>
         }

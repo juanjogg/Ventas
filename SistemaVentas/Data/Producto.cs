@@ -26,6 +26,7 @@ namespace SistemaVentas.Data
         public int Stock { get; set; }
         public int IdProveedor { get; set; }
         public int IdCategoria { get; set; }
+        public string Descripcion { get; set; }
     
         public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
