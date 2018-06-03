@@ -1,0 +1,33 @@
+﻿@model MD.Cliente
+@using MD = SistemaVentas.Models;
+@{
+    ViewBag.Title = "Ingreso";
+}
+
+<h2>Ingreso</h2>
+<div>
+    @using (Html.BeginForm("Ingreso", "Cuenta", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <td>
+                    <label>Ingrese su Identificacion</label>
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Id)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label style="color:red">@Html.DisplayFor(model => model.errorLogin)</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Login" name="name" />
+                    
+                </td>
+            </tr>
+        </table>
+    }
+</div>

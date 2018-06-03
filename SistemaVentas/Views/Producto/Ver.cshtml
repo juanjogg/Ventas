@@ -1,8 +1,31 @@
-﻿@model MD.Producto 
+﻿@model MD.Producto
 @using MD = SistemaVentas.Models;
 @{
-    ViewBag.Title = Model.nombre;
+    ViewBag.Title = "Ver";
+}
+@{
+    List<SelectListItem> items = new List<SelectListItem>();
+    for (int i = 0; i < Model.stock; i++)
+    {
+        SelectListItem item = new SelectListItem();
+        item.Text = (i + 1).ToString();
+        item.Value = (i + 1).ToString();
+        items.Add(item);
+    }
+
 }
 
-<h2>@Model</h2>
+<div class="jumbotron">
+    <h1>@Model.nombre</h1>
+    <p class="active">@Model.descripcion</p>
+    <p class="lead">$@Model.precio COP</p>
+    <label>Cantidad</label>
+    @Html.DropDownList("ddlCantidad", items)
+
+</div>
+<div>
+
+
+    <p><a href="@Url.Action("Agregar","Producto")" class="btn btn-primary btn-lg">Comprar</a></p>
+</div>
 

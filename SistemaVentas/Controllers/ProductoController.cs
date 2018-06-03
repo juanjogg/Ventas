@@ -15,7 +15,7 @@ namespace SistemaVentas.Controllers
         public ActionResult Ver(int id)
         {
             MD.Producto producto = new MD.Producto();
-            
+            producto = consultarProducto(id);
             return View(producto);
         }
 
@@ -23,13 +23,15 @@ namespace SistemaVentas.Controllers
         {
             var prod = from p in dataBase.Productos
                        where (p.Id == id)
-                       select new { p.Precio, p.Nombre,p.Categoria,p.Id};
+                       select new { p.Precio, p.Nombre,p.Categoria,p.Id, p.Stock, p.Descripcion};
             MD.Producto producto = new MD.Producto();
             foreach(var pd in prod)
             {
                 producto.Id = pd.Id;
                 producto.precio = pd.Precio;
                 producto.nombre = pd.Nombre;
+                producto.stock = pd.Stock;
+                producto.descripcion = pd.Descripcion;
                 producto.categoria = new MD.Categoria();
                 producto.categoria.descripcion = pd.Categoria.Descripcion;
                 
