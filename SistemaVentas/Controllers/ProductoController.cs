@@ -8,9 +8,10 @@ using DT = SistemaVentas.Data;
 
 namespace SistemaVentas.Controllers
 {
+
     public class ProductoController : Controller
     {
-        List<MD.Producto> shProducto = new List<MD.Producto>();
+        
         DT.ServerVentasEntities dataBase = new DT.ServerVentasEntities();        
         // GET: Producto
         public ActionResult Ver(int id)
@@ -21,27 +22,23 @@ namespace SistemaVentas.Controllers
             ViewBag.id = id;
             return View(producto);
         }
+
         [HttpPost]
-        public ActionResult Agregar(MD.Producto producto)
+        public ActionResult ShoppingCart(MD.Producto producto)
         {
-            if(Session["userID"] != null)
+            if (Session["userID"] != null)
             {
 
 
                 
-                shProducto.Add(producto);
-                return RedirectToAction("ShoppingCart", "Producto");
+                Shitems.shProducto.Add(producto);
+                return View(Shitems.shProducto);
             }
             else
             {
                 return RedirectToAction("Index", "Cuenta");
             }
             
-            
-        }
-        public ActionResult ShoppingCart()
-        {
-            return View(shProducto);
         }
         public ActionResult Compra()
         {
@@ -82,5 +79,9 @@ namespace SistemaVentas.Controllers
             
             return items;
         }
+    }
+    internal class Shitems
+    {
+        internal static List<MD.Producto> shProducto = new List<MD.Producto>();
     }
 }
