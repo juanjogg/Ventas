@@ -14,5 +14,6 @@ namespace SistemaVentas.Models
         public int IdProveedor { get; set; }
         public string descripcion { get; set; }
         public Categoria categoria { get; set; }
+        public int cantidad { get; set; }
     }
 }

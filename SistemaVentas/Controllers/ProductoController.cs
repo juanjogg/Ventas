@@ -10,13 +10,42 @@ namespace SistemaVentas.Controllers
 {
     public class ProductoController : Controller
     {
+        List<MD.Producto> shProducto = new List<MD.Producto>();
         DT.ServerVentasEntities dataBase = new DT.ServerVentasEntities();        
         // GET: Producto
         public ActionResult Ver(int id)
         {
             MD.Producto producto = new MD.Producto();
             producto = consultarProducto(id);
+            ViewBag.listado = obtenerStock(producto.stock);
+            ViewBag.id = id;
             return View(producto);
+        }
+        [HttpPost]
+        public ActionResult Agregar(MD.Producto producto)
+        {
+            if(Session["userID"] != null)
+            {
+
+
+                
+                shProducto.Add(producto);
+                return RedirectToAction("ShoppingCart", "Producto");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Cuenta");
+            }
+            
+            
+        }
+        public ActionResult ShoppingCart()
+        {
+            return View(shProducto);
+        }
+        public ActionResult Compra()
+        {
+            return RedirectToAction("Index","Home");
         }
 
         public MD.Producto consultarProducto(int id)
@@ -37,6 +66,21 @@ namespace SistemaVentas.Controllers
                 
             }     
             return producto;
+        }
+        public List<SelectListItem> obtenerStock(int stock)
+        {
+            
+            List<SelectListItem> items = new List<SelectListItem>();
+            for (int i = 0; i < stock; i++)
+            {
+                SelectListItem item = new SelectListItem();
+                item.Text = (i + 1).ToString();
+                item.Value = (i + 1).ToString();
+                items.Add(item);
+            }
+
+            
+            return items;
         }
     }
 }

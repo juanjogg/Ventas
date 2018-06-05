@@ -1,0 +1,38 @@
+﻿@model List<MD.Producto>
+@using MD = SistemaVentas.Models;
+@{
+    if (Session["userID"] != null)
+    {
+        Layout = "~/Views/Shared/_Layout2.cshtml";
+    }
+
+    ViewBag.Title = "Shopping Cart";
+}
+<h2>ShoppingCart</h2>
+
+<div class="jumbotron">
+    @using (Html.BeginForm("Compra","Producto",FormMethod.Post)) { double m = 0;
+
+        <table class="table">
+            <tr>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+            @foreach (MD.Producto prod in Model)
+            {
+                <tr>
+                    <td>@prod.nombre</td>
+                    <td>@prod.cantidad</td>
+                    <td>$@(prod.cantidad * prod.precio) COP</td>
+                    @{ m += prod.cantidad * prod.precio;}
+                </tr>
+                        }
+            <tr>
+                <td>Total</td>
+                <td> </td>
+                <td>$@m COP</td>
+            </tr>
+        </table>
+    }
+</div>

@@ -1,31 +1,57 @@
 ﻿@model MD.Producto
 @using MD = SistemaVentas.Models;
 @{
-    ViewBag.Title = "Ver";
-}
-@{
-    List<SelectListItem> items = new List<SelectListItem>();
-    for (int i = 0; i < Model.stock; i++)
+    if (Session["userID"] != null)
     {
-        SelectListItem item = new SelectListItem();
-        item.Text = (i + 1).ToString();
-        item.Value = (i + 1).ToString();
-        items.Add(item);
+        Layout = "~/Views/Shared/_Layout2.cshtml";
     }
 
+    ViewBag.Title = "Detalle Producto";
 }
 
+
 <div class="jumbotron">
-    <h1>@Model.nombre</h1>
-    <p class="active">@Model.descripcion</p>
-    <p class="lead">$@Model.precio COP</p>
-    <label>Cantidad</label>
-    @Html.DropDownList("ddlCantidad", items)
+    
+    
+    
+    @using (Html.BeginForm("Agregar","Producto",FormMethod.Post )) {
+        <table>
+            <tr>
+                
+                <td>
+                    @Html.HiddenFor(s => s.Id)
+                    @Html.HiddenFor(md => md.nombre)
+                    <h1>@Html.DisplayFor(s => s.nombre)</h1>
 
-</div>
-<div>
+                </td>
 
+            </tr>
+            <tr>
+                <td>
+                    
+                    <p class="active">@Html.DisplayFor(s => s.descripcion)</p>
 
-    <p><a href="@Url.Action("Agregar","Producto")" class="btn btn-primary btn-lg">Comprar</a></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.HiddenFor(md => md.precio)
+                    <p class="lead">$@Html.DisplayFor(s => s.precio) COP</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    
+                    <label>Cantidad</label>
+                    @Html.DropDownListFor(s => s.cantidad,(List<SelectListItem>) ViewBag.listado)
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Comprar"/></td>
+            </tr>
+        </table>
+        
+        
+    }
 </div>
 

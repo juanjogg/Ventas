@@ -1,5 +1,10 @@
 ﻿@model List<MD.Producto>
 @{
+    if(Session["userID"] != null)
+    {
+        Layout = "~/Views/Shared/_Layout2.cshtml";
+    }
+
     ViewBag.Title = "Home Page";
 }
 @using MD = SistemaVentas.Models;

@@ -29,9 +29,14 @@ namespace SistemaVentas.Controllers
             else
             {
                 Session["userID"] = user.Id;
-                //return View("Index", "Home");
+                ViewBag.nombre = user.Nombre;
                 return RedirectToAction("Index","Home");
             }
+        }
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index","Home");
         }
     }
        
