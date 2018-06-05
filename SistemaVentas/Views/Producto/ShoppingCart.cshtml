@@ -11,7 +11,7 @@
 <h2>ShoppingCart</h2>
 
 <div class="jumbotron">
-    @using (Html.BeginForm("Compra","Producto",FormMethod.Post)) { double m = 0;
+    @{ double m = 0;
 
         <table class="table">
             <tr>
@@ -26,15 +26,16 @@
                     <td>@prod.cantidad</td>
                     <td>$@(prod.cantidad * prod.precio) COP</td>
                     @{ m += prod.cantidad * prod.precio;}
+                    
                 </tr>
                         }
             <tr>
                 <td>Total</td>
-                <td> </td>
+                <td></td>
                 <td>$@m COP</td>
             </tr>
             <tr>
-                <td><input type="submit" value="Confirmar"/></td>
+                <td><p class="btn btn-primary btn-lg"><a href="@Url.Action("Compra","Producto")">Comprar</a></p></td>
             </tr>
         </table>
     }

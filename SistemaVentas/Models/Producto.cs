@@ -15,5 +15,6 @@ namespace SistemaVentas.Models
         public string descripcion { get; set; }
         public Categoria categoria { get; set; }
         public int cantidad { get; set; }
+        
     }
 }

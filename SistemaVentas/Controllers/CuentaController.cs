@@ -11,7 +11,7 @@ namespace SistemaVentas.Controllers
     public class CuentaController : Controller
     {
         // GET: Cuenta
-        
+        internal static DT.Cliente clientec = new DT.Cliente();
         public ActionResult Index()
         {
             return View();
@@ -21,6 +21,7 @@ namespace SistemaVentas.Controllers
         {
             DT.ServerVentasEntities dataBase = new DT.ServerVentasEntities();
             var user = dataBase.Clientes.Where(x => x.Id == cliente.Id).FirstOrDefault();
+            clientec = user;
             if (user == null)
             {
                 cliente.errorLogin = "ID incorrecto!";
@@ -35,7 +36,9 @@ namespace SistemaVentas.Controllers
         }
         public ActionResult LogOut()
         {
+            clientec = null;
             Session.Abandon();
+            
             return RedirectToAction("Index","Home");
         }
     }

@@ -31,6 +31,7 @@ namespace SistemaVentas.Controllers
 
 
                 
+
                 Shitems.shProducto.Add(producto);
                 return View(Shitems.shProducto);
             }
@@ -40,8 +41,11 @@ namespace SistemaVentas.Controllers
             }
             
         }
+        
         public ActionResult Compra()
         {
+            double d = calcularTotal();
+            agregarVenta(d);
             return RedirectToAction("Index","Home");
         }
 
@@ -78,6 +82,65 @@ namespace SistemaVentas.Controllers
 
             
             return items;
+        }
+
+        public void agregarVenta(double total)
+        {
+            int numero = dataBase.Ventas.Count();
+            try
+            {
+                DT.Venta venta = new DT.Venta();
+                venta.Id = numero + 1;
+                venta.IdCliente = CuentaController.clientec.Id;
+                venta.Descuento = 0;
+                venta.Fecha = DateTime.Now.Date;
+                venta.Total = total;
+                dataBase.Ventas.Add(venta);
+                dataBase.SaveChanges();
+                agregarFactura(venta.Id);
+                
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public void agregarFactura(int idVenta)
+        {
+            try
+            {
+                foreach (MD.Producto producto in Shitems.shProducto)
+                {
+                    DT.Factura factura = new DT.Factura();
+
+                    //factura.Producto = new DT.Producto();
+                    //factura.Producto.Descripcion = producto.descripcion;
+                    //factura.Producto.Id = producto.Id;
+                    //factura.Producto.Nombre = producto.nombre;
+                    //factura.Producto.Precio = producto.precio;
+                    factura.IdProducto = producto.Id;
+                    factura.IdVenta = idVenta;
+                    factura.Cantidad = producto.cantidad;
+                    dataBase.Facturas.Add(factura);
+                    dataBase.SaveChanges();
+
+                }
+                Shitems.shProducto.Clear();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+            
+        }
+        public double calcularTotal()
+        {
+            double total = 0;
+            foreach(MD.Producto prod in Shitems.shProducto)
+            {
+                total += prod.precio * prod.cantidad;
+            }
+            return total;
         }
     }
     internal class Shitems
